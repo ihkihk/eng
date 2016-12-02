@@ -1,0 +1,86 @@
+
+ +------------+                +--------------------+
+ |            |                |                    |                                  ms1    +--------+
+ |   Processor|                |                    |                                +--------+        |
+ |            |                |                    |                                |        | End    |
+ |       +----+                +---+            +---+              +-----------+     |        | Device |
+ |       |    |                |   |            |   |              |           |     |   +----+        |
+ |       | I  |      Bus1      | I |            | I |     Bus2     |           +-----+   |    |        |
+ |       | /  |                | / |            | / |              |           |         |    +--------+
+ |       | F  +----------------+ F |     I/F    | F +--------------+  DECODER  +---------+
+ |       | 1  |                | 1 |  converter | 2 |              |           |    Bus2 |
+ |       |    |                |   |            |   |              |           |         |
+ |       |    |                |   |            |   |              |           +-----+   |
+ |       |    |                |   |            |   |              +-----------+     |   |    +--------+
+ |       +----+                +---+            +---+                                |   |    |        |
+ |            |                |                    |                                |   +----+        |
+ |            |                |                    |                                |        | End    |
+ +------------+                +--------------------+                                |        | Device |
+                                                                                     +--------+        |
+                                                                                       ms2    +--------+
+
+Bus = Interconnect
+
+
+Following objects take part in determining the address map:
+- processor interfaces
+- bus
+- interface adapters/translators
+- address space decoders
+- end devices
+
+
+The structure of the interface and the electrical and logical organization of its signaling is determined by one or more levels of protocol.
+
+Bus share the characteristics of the interfaces they connect.
+
+
+Each interface has the following attributes:
+- address width
+- address granularity (byte-shift=0, word-shift=1, dword-shift=2, qword-shift=3)
+- data bus width
+- clock frequency
+- endianess (byte and bit)
+- virtual vs. physical addressing
+- protocol
+-- multiplexed or separate address/data busses
+-- stream vs. transaction oriented
+-- flow control via in-band (IB) or out-of-band (OOB) signaling
+-- cachability and cache-coherence
+
+
+Interfaces can have one or more real or virtual channels.
+
+Transactions have the following attributes:
+- synchronous vs. asynchronous
+- packet vs. circuit oriented
+
+
+Address map features:
+- Each interface sees an address space
+- The size of the address space in terms of addressable objects is determined by the address width and granularity.
+- The parent address space can be divided into child address spaces (regions) by the decoders
+- Regions can be fully or partially decoded
+- Fully decoded regions occupy a single space in their parent address space
+- Partially decoded regions are aliased several times in their parent address space
+- An end device is mapped in a region
+
+
+Address map is to be documented in the following way:
+- Starting from processor (upstream) and going down to the final device (downstream)
+- for each interface
+-- Total size of the address space seen by the interface
+-- Granularity of addressing (AG)
+-- Granularity of accessed objects (OG) (can be different from AG if there are byte-enable signals)
+-- Clock frequency
+-- Data width
+-- Endiannes
+-- Protocol
+-- List of interface converters. For each downstream interface perform the same description.
+-- List of decoded regions (by decoders or end devices). For each region:
+--- decoded parent address bits (mask and value)
+--- offset in parent space
+--- size
+--- final absolute address as seen by the programmer
+
+

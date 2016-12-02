@@ -1,0 +1,36 @@
+- smps info - type: converter, regulator, controller; architecture: buck, boost, buck-boost, fly-back, cuk, etc.
+- smps params - switching frequency (fixed/var/programmable), 
+- smps functions - UVLO, OCP, OVP, soft-start, line voltage feed-forward, voltage/current regulation loop, anti subharmonic oscillation ramp control
+                   tracking, enable, internal compensation, power good, clock sync, discharge switch
+- design settings
+-- min/max input voltage
+-- output current
+-- min/max Ta
+-- design optimized for: size/cost/efficiency
+-- Vout max ripple
+-- Iout step
+-- Vout step error
+-- max height
+
+- design
+-- selection of switching frequency
+-- selection of inductor
+-- selection of switching elements
+-- selection of output cap
+-- selection of input cap
+-- programming soft start
+-- control loop and compensation network
+- operational estimates
+-- switching frequency
+-- PSM threshold	
+-- duty cycle
+-- inductor ripple
+-- Vout ripple
+-- Vstep
+-- input current
+-- current limit
+-- efficiency
+-- SS time
+- dissipation estimates
+- temperature estimates
+
