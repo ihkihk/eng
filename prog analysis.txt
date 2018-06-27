@@ -1,0 +1,36 @@
+Valgrind - does not run on Windows or Cygwin
+
+For Windows: Visual Leak Detector (free) - http://vld.codeplex.com/
+
+MSDN > Finding Memory Leaks Using the CRT Library [http://msdn.microsoft.com/en-us/library/x98tx3cf(v=vs.100).aspx]
+#ifdef _CHECK_MEMORY_LEAKS_
+#define _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC_NEW
+#include <stdlib.h>
+#include <crtdbg.h>
+#endif   //_CHECK_MEMORY_LEAKS_
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#endif
+
+
+Dr. Memory!!! drmemory.org
+The Dr. Memory release includes drstrace, a system call tracer for Windows.
+
+Windows AppVerifier!
+
+Valgrind alternatives for windows:
+[http://stackoverflow.com/questions/413477/is-there-a-good-valgrind-substitute-for-windows]
+memcheck -> dr.Memory
+callgrind -> verysleepy ( http://www.codersnotes.com/sleepy ), AMD CodeAnalyst™ Performance Analyzer (free), Windows Performance Analysis
+massif -> VMMap from sysinternals, !heap command in windbg
+cachegrind -> none:(
+DRD -> none:(
+
+
+
+Paid:
+Memory Validator - http://www.softwareverify.com/cpp/memory/index.html
+DevPartner BoundsChecker - http://microfocus.com/products/DevPartner/BoundsCheckerSuite.asp very expensive
+Purify
+Intel V-Tune - very good. Simulate all chipsets
